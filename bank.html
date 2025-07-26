@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>لعبة بنك</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #eafafa;
+    }
+
+    header {
+      background-color: #00796b;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      position: relative;
+    }
+
+    .back-arrow {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 24px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .content {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .question {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: #009688;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 18px;
+      margin: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .score {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="back-arrow">←</a>
+  لعبة بنك
+</header>
+
+<div class="content">
+  <div class="question" id="question">اضغط "السؤال التالي" للبدء</div>
+  <button class="btn" onclick="nextQuestion()">السؤال التالي</button>
+  <button class="btn" onclick="submitAnswer(true)">إجابة صحيحة</button>
+  <button class="btn" onclick="submitAnswer(false)">إجابة خاطئة</button>
+  <button class="btn" onclick="bankPoints()">بنك</button>
+
+  <div class="score" id="score">
+    النقاط الحالية: 0 | النقاط في البنك: 0
+  </div>
+</div>
+
+<script>
+  let roundPoints = 0;
+  let bankedPoints = 0;
+  let multiplier = 1;
+  let currentQuestion = 1;
+  let totalQuestions = 12;
+
+  function nextQuestion() {
+    if (currentQuestion > totalQuestions) {
+      alert("انتهت الجولة! مجموع نقاطك في البنك: " + bankedPoints);
+      return;
+    }
+    document.getElementById('question').innerText = "سؤال رقم " + currentQuestion;
+  }
+
+  function submitAnswer(isCorrect) {
+    if (currentQuestion > totalQuestions) return;
+
+    if (isCorrect) {
+      roundPoints += multiplier;
+      multiplier *= 2;
+    } else {
+      roundPoints = 0;
+      multiplier = 1;
+    }
+
+    updateScore();
+    currentQuestion++;
+    nextQuestion();
+  }
+
+  function bankPoints() {
+    bankedPoints += roundPoints;
+    roundPoints = 0;
+    multiplier = 1;
+    updateScore();
+  }
+
+  function updateScore() {
+    document.getElementById("score").innerText =
+      `النقاط الحالية: ${roundPoints} | النقاط في البنك: ${bankedPoints}`;
+  }
+</script>
+
+</body>
+</html>

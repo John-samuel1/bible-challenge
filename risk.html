@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>لعبة ريسك</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #eafafa;
+    }
+
+    header {
+      background-color: #00796b;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      position: relative;
+    }
+
+    .back-arrow {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 24px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .content {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .btn {
+      background-color: #009688;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 18px;
+      margin: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .score {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="back-arrow">←</a>
+  لعبة ريسك
+</header>
+
+<div class="content">
+  <h3>اختر سؤال:</h3>
+  <button class="btn" onclick="answerQuestion(5)">سؤال 5 نقاط</button>
+  <button class="btn" onclick="answerQuestion(10)">سؤال 10 نقاط</button>
+  <button class="btn" onclick="answerQuestion(20)">سؤال 20 نقطة</button>
+  <button class="btn" onclick="answerQuestion(40)">سؤال 40 نقطة</button>
+
+  <div style="margin-top: 20px;">
+    <button class="btn" onclick="submitAnswer(true)">إجابة صحيحة</button>
+    <button class="btn" onclick="submitAnswer(false)">إجابة خاطئة</button>
+  </div>
+
+  <div class="score" id="score">
+    نقاط الفريق: 0
+  </div>
+</div>
+
+<script>
+  let score = 0;
+  let currentPoints = 0;
+
+  function answerQuestion(points) {
+    currentPoints = points;
+    alert(`السؤال بـ ${points} نقطة. جاوب وبعد كده اختار إذا كانت الإجابة صحيحة أو خاطئة.`);
+  }
+
+  function submitAnswer(correct) {
+    if (correct) {
+      score += currentPoints;
+    }
+    currentPoints = 0;
+    updateScore();
+  }
+
+  function updateScore() {
+    document.getElementById("score").innerText = `نقاط الفريق: ${score}`;
+  }
+</script>
+
+</body>
+</html>
