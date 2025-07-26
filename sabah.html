@@ -35,18 +35,6 @@
       padding: 20px;
     }
 
-    .btn {
-      width: 100%;
-      background-color: #009688;
-      border: none;
-      padding: 20px;
-      color: white;
-      font-size: 20px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      cursor: pointer;
-    }
-
     .card {
       background-color: white;
       border: 2px solid #b2dfdb;
@@ -54,6 +42,7 @@
       padding: 15px;
       margin-bottom: 20px;
       box-shadow: 1px 2px 6px rgba(0,0,0,0.1);
+      cursor: pointer;
     }
 
     .card-title {
@@ -63,15 +52,26 @@
       margin-bottom: 10px;
     }
 
-    .empty-boxes {
-      height: 150px;
-      border: 2px dashed #ccc;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #999;
+    .card-body {
+      display: none;
+      margin-top: 10px;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .btn {
+      width: 100%;
+      background-color: #009688;
+      border: none;
+      padding: 15px;
+      color: white;
       font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -83,47 +83,70 @@
   </header>
 
   <div class="content">
-    <button class="btn">ابدأ اللعب</button>
 
-    <div class="card">
+    <div class="card" onclick="toggleCard(this)">
       <div class="card-title">بنك</div>
-      <div>
-
+      <div class="card-body">
+        <p>شرح لعبة بنك هنا...</p>
+        <button class="btn">ابدأ اللعب</button>
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" onclick="toggleCard(this)">
       <div class="card-title">ريسك</div>
-      <div>
-
+      <div class="card-body">
+        <p>شرح لعبة ريسك هنا...</p>
+        <button class="btn">ابدأ اللعب</button>
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" onclick="toggleCard(this)">
       <div class="card-title">توب 10</div>
-      <div>
-
+      <div class="card-body">
+        <p>شرح لعبة توب 10 هنا...</p>
+        <button class="btn">ابدأ اللعب</button>
       </div>
     </div>
 
-    <div class="card">
+    <div class="card" onclick="toggleCard(this)">
       <div class="card-title">اهبد صح</div>
-      <div>
-
+      <div class="card-body">
+        <p>شرح لعبة اهبد صح هنا...</p>
+        <button class="btn">ابدأ اللعب</button>
       </div>
     </div>
-    <div class="card">
+
+    <div class="card" onclick="toggleCard(this)">
       <div class="card-title">تمثيل</div>
-      <div>
-
+      <div class="card-body">
+        <p>شرح لعبة التمثيل هنا...</p>
+        <button class="btn">ابدأ اللعب</button>
       </div>
     </div>
-    <div class="card">
+
+    <div class="card" onclick="toggleCard(this)">
       <div class="card-title">انا مين</div>
-      <div>
-
+      <div class="card-body">
+        <p>شرح لعبة أنا مين هنا...</p>
+        <button class="btn">ابدأ اللعب</button>
       </div>
     </div>
 
+  </div>
+
+  <script>
+    function toggleCard(card) {
+      const body = card.querySelector(".card-body");
+      const isOpen = body.style.display === "block";
+
+      // إغلاق كل الكروت المفتوحة
+      document.querySelectorAll('.card-body').forEach(el => el.style.display = 'none');
+
+      // فتح الكارت الحالي لو مش مفتوح
+      if (!isOpen) {
+        body.style.display = "block";
+      }
+    }
+  </script>
 </body>
 </html>
